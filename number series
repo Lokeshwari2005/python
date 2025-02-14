@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    long long n;
+    scanf("%lld", &n);
+    long long singers[n];
+    for (long long i = 0; i < n; i++) {
+        scanf("%lld", &singers[i]);
+    }
+    long long maxSinger = 0;
+    for (long long i = 0; i < n; i++) {
+        if (singers[i] > maxSinger) {
+            maxSinger = singers[i];
+        }
+    }
+    
+    long long *freq = (long long *)calloc(maxSinger + 1, sizeof(long long));
+    for (long long i = 0; i < n; i++) {
+        freq[singers[i]]++;
+    }
+    long long maxCount = 0;
+    for (long long i = 0; i <= maxSinger; i++) {
+        if (freq[i] > maxCount) {
+            maxCount = freq[i];
+        }
+    
+    long long favouriteSingers = 0;
+    for (long long i = 0; i <= maxSinger; i++) {
+        if (freq[i] == maxCount) {
+            favouriteSingers++;
+        }
+    }
+    printf("%lld\n", favouriteSingers);
+    free(freq);
+    
+    return 0;
+}
